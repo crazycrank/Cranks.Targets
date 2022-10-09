@@ -1,0 +1,32 @@
+﻿<Project>
+
+  <!-- NOTE: From https://github.com/dotnet/runtime/blob/main/eng/packaging.targets -->
+  <!-- NOTE: This target executes the GetAnalyzerPackFiles step of this project to get all analyzer files
+             and packs them, as well as the corresponding symbol files to the analyzer folder -->
+  <PropertyGroup>
+    <BeforePack>$(BeforePack);IncludeAnalyzersInPackage</BeforePack>
+  </PropertyGroup>
+
+  <Target Name="IncludeAnalyzersInPackage"
+          Condition="'$(PackAsAnalyzer)' == 'true'">
+
+    <CallTarget Targets="GetAnalyzerPackFiles">
+      <Output TaskParameter="TargetOutputs"
+              ItemName="_AnalyzerFile" />
+    </CallTarget>
+
+    <ItemGroup>
+      <Content Include="@(_AnalyzerFile)"
+               Pack="True"
+               Condition="!%(_AnalyzerFile.IsSymbol)" />
+      <!-- Symbols don't honor PackagePath.  By default they are placed in lib/%(TargetFramework).
+           Pack does honor TargetPath and does Path.Combine("lib/%(TargetFramework)", "%(TargetPath)"),
+           so a rooted path value for TargetPath will override lib.
+           https://github.com/NuGet/Home/issues/10860 -->
+      <_TargetPathsToSymbols Include="@(_AnalyzerFile)"
+                             TargetPath="/%(_AnalyzerFile.PackagePath)"
+                             Condition="%(_AnalyzerFile.IsSymbol)" />
+    </ItemGroup>
+  </Target>
+
+</Project>

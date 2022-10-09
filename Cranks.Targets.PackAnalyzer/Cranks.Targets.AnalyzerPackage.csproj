@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <IsPackable>true</IsPackable>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <Title>AnalyzerReference</Title>
+    <Description>
+      Adding this project to your packable analyzer project will create a nuget package containing all the necessary files in the analyzer folder of the final nuget package.
+      add &lt;PackAsAnalyzer&gt;true&lt;/PackAsAnalyzer&gt; to any property group in your analyer project to enable.
+
+      Use in conjunction with Cranks.Targets.PackableAnalyzer
+    </Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Cranks.Targets.PackableAnalyzer\Cranks.Targets.Analyzer.csproj"
+                      PrivateAssets="all"
+                      IncludeAssets="build" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="build\**"
+          Pack="True"
+          PackagePath="build" />
+    <None Include="..\README.md"
+          Pack="True"
+          Link="README.md"
+          PackagePath="" />
+    <None Include="_._"
+          Pack="True"
+          PackagePath="lib" />
+  </ItemGroup>
+
+</Project>

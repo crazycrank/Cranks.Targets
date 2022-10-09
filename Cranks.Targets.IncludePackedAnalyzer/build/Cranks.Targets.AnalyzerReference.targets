@@ -1,5 +1,15 @@
 ﻿<Project>
 
+  <!-- NOTE: From https://github.com/dotnet/runtime/blob/main/eng/generator.targets -->
+  <!-- AnalyzerReference items are transformed to ProjectReferences with the required analyzer metadata. -->
+  <ItemGroup>
+    <ProjectReference Include="@(AnalyzerReference)"
+                      ReferenceOutputAssembly="false"
+                      OutputItemType="Analyzer"
+                      Pack="false" />
+    <ProjectReference Update="@(AnalyzerReference->WithMetadataValue('ReferenceAnalyzer', 'false'))"
+                      OutputItemType="" />
+  </ItemGroup>
 
   <!-- NOTE: From https://github.com/dotnet/runtime/blob/main/eng/packaging.targets -->
   <!-- NOTE: This target executes the GetAnalyzerPackFiles step of all ProjectReferences referenced with AnalyzerReference,
@@ -8,11 +18,12 @@
        These will be returned as items with identity pointing to the built file, and PackagePath metadata
        set to their location in the package. IsSymbol metadata will be set to distinguish symbols. -->
   <PropertyGroup>
-    <BeforePack>$(BeforePack);IncludeAnalyzersInPackage</BeforePack>
+    <BeforePack>$(BeforePack);IncludeReferencedAnalyzersInPackage</BeforePack>
   </PropertyGroup>
 
-  <Target Name="IncludeAnalyzersInPackage"
+  <Target Name="IncludeReferencedAnalyzersInPackage"
           Condition="'@(AnalyzerReference)' != '' and @(AnalyzerReference->AnyHaveMetadataValue('Pack', 'true'))">
+
     <MSBuild Projects="@(AnalyzerReference->WithMetadataValue('Pack', 'true'))"
              Targets="GetAnalyzerPackFiles">
       <Output TaskParameter="TargetOutputs"
