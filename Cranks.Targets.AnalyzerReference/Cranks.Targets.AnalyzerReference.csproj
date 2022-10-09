@@ -5,6 +5,13 @@
     <IsPackable>true</IsPackable>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <IncludeBuildOutput>false</IncludeBuildOutput>
+    <Title>AnalyzerReference</Title>
+    <Description>
+      Using this project in an library project to easily pack your referenced analyzers. Just add your analyzers using an Analyzer refernce. See the readme for more details.
+      Use in conjunction with Cranks.Targets.GetAnalyzerPackFiles.
+
+      Targets are originally from the dotnet/runtime project and just repackaged for easy use in your projects.
+    </Description>
   </PropertyGroup>
 
   <ItemGroup>

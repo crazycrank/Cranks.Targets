@@ -4,6 +4,8 @@ Right now it contains two projects simplyfying the creation and packaging proces
 # Analyzer Support
 Creating a good analyzer is hard enough. Delivering it to your end users is seemingly even harder. After countless hours of trial and error, I took inspiration in how Microsoft themselves ship their analyzers, by looking specifically at the repository for [System.Text.Json](https://github.com/dotnet/runtime/tree/main/src/libraries/System.Text.Json). I have extracted the resulting targets into these projects to help other developers struggling with the same issues.
 
+> All targets in these packages are from the [dotnet/runtime](https://github.com/dotnet/runtime/) repository. I merely extracted and packaged these targets for simplified use.
+
 ## Packages
 * [Cranks.Targets.GetAnalyzerPackFiles](https://www.nuget.org/packages/Cranks.Targets.GetAnalyzerPackFiles)
   Add this package to your analyzer projects.

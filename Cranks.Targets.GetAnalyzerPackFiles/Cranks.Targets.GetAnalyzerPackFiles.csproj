@@ -5,6 +5,13 @@
     <IsPackable>true</IsPackable>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <IncludeBuildOutput>false</IncludeBuildOutput>
+    <Title>GetAnalyzerPackFiles</Title>
+    <Description>
+      Using this project in an analyzer, a new build target called GetAnalyzerPackFiles gets added, which returns all the required analyzer files.
+      Use this in conjunction with Cranks.Targets.AnalyzerReference to enable packing of analyzers within your libary projects.
+
+      Targets are originally from the dotnet/runtime project and just repackaged for easy use in your projects.
+    </Description>
   </PropertyGroup>
 
   <ItemGroup>
