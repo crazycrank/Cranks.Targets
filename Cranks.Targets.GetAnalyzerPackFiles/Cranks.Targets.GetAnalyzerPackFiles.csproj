@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.0</TargetFramework>
+    <IsPackable>true</IsPackable>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="build\**" Pack="True" PackagePath="build" />
+    <None Include="..\README.md" Pack="True" Link="README.md" PackagePath="" />
+    <None Include="_._" Pack="True" PackagePath="lib\netstandard1.0" />
+  </ItemGroup>
+
+</Project>

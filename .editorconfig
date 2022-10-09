@@ -1,0 +1,23 @@
+﻿root = true
+# To learn more about .editorconfig see https://aka.ms/editorconfigdocs
+
+###############################
+# Core EditorConfig Options   #
+###############################
+# All files
+[*]
+indent_style = space
+charset = utf-8-bom
+insert_final_newline = true
+trim_trailing_whitespace = true
+end_of_line = crlf
+max_line_length = 180
+
+# Code files
+[*.{asax,ascx,aspx,axaml,cs,cshtml,css,htm,html,js,jsx,master,paml,razor,skin,ts,tsx,vb,xaml,xamlx,xoml}]
+indent_size = 4
+tab_width = 4
+
+[*.{appxmanifest,axml,build,config,csproj,dbml,discomap,dtd,json,jsproj,lsproj,njsproj,nuspec,proj,props,resjson,resw,resx,StyleCop,targets,tasks,vbproj,xml,xsd}]
+indent_size = 2
+tab_width = 2

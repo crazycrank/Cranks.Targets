@@ -1,0 +1,16 @@
+﻿<Project>
+
+  <!-- Package Configuration -->
+  <PropertyGroup>
+    <Authors>Max Obrist</Authors>
+    <Product>Cranks.Targets</Product>
+    <Company>Cranks</Company>
+    <PackageTags>cranks;source generators;analyzers;build;targets;nuget;packaging</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Copyright>$([System.DateTime]::Today.Year)</Copyright>
+    <RepositoryType>git</RepositoryType>
+    <PackageProjectUrl>https://github.com/crazycrank/Cranks.Targets</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/crazycrank/Cranks.Targets</RepositoryUrl>
+  </PropertyGroup>
+
+</Project>
