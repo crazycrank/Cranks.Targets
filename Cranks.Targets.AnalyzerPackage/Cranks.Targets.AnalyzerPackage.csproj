@@ -15,7 +15,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Cranks.Targets.PackableAnalyzer\Cranks.Targets.Analyzer.csproj"
+    <ProjectReference Include="..\Cranks.Targets.Analyzer\Cranks.Targets.Analyzer.csproj"
                       PrivateAssets="all"
                       IncludeAssets="build" />
   </ItemGroup>
