@@ -1,14 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.0</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <IsPackable>true</IsPackable>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <IncludeBuildOutput>false</IncludeBuildOutput>
-    <Title>GetAnalyzerPackFiles</Title>
+    <Title>AnalyzerReference</Title>
     <Description>
-      Using this project in an analyzer, a new build target called GetAnalyzerPackFiles gets added, which returns all the required analyzer files.
-      Use this in conjunction with Cranks.Targets.AnalyzerReference to enable packing of analyzers within your libary projects.
+      Using this project in an library project to easily pack your referenced analyzers. Just add your analyzers using an Analyzer refernce. See the readme for more details.
+      Use in conjunction with Cranks.Targets.PackableAnalyzer.
 
       Targets are originally from the dotnet/runtime project and just repackaged for easy use in your projects.
     </Description>
@@ -17,7 +17,7 @@
   <ItemGroup>
     <None Include="build\**" Pack="True" PackagePath="build" />
     <None Include="..\README.md" Pack="True" Link="README.md" PackagePath="" />
-    <None Include="_._" Pack="True" PackagePath="lib\netstandard1.0" />
+    <None Include="_._" Pack="True" PackagePath="lib" />
   </ItemGroup>
 
 </Project>

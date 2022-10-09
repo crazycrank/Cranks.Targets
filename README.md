@@ -7,10 +7,10 @@ Creating a good analyzer is hard enough. Delivering it to your end users is seem
 > All targets in these packages are from the [dotnet/runtime](https://github.com/dotnet/runtime/) repository. I merely extracted and packaged these targets for simplified use.
 
 ## Packages
-* [Cranks.Targets.GetAnalyzerPackFiles](https://www.nuget.org/packages/Cranks.Targets.GetAnalyzerPackFiles)
+* [Cranks.Targets.PackableAnalyzer](https://www.nuget.org/packages/Cranks.Targets.PackableAnalyzer)
   Add this package to your analyzer projects.
   The package adds a new MS Build target to your project called `GetAnalyzerPackFiles`. When this target is called it returns a list of all the files which have to be packed into the analyzer folder of your libraries nuget package.
-* [Cranks.Targets.GetAnalyzerPackFiles](https://www.nuget.org/packages/Cranks.Targets.AnalyzerReference)
+* [Cranks.Targets.IncludePackedAnalyzer](https://www.nuget.org/packages/Cranks.Targets.IncludePackedAnalyzer)
   Add this package to a library project, in which you want to ship your analyzers or source generators with.
   This adds a new project reference type which you can use like this:
   `<AnalyzerReference Include="path\to\your\analyzer\project.csproj" Pack="true" ReferenceAnalyzer="false" />`
