@@ -14,8 +14,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cranks.Targets.AnalyzerReference", "Cranks.Targets.AnalyzerReference\Cranks.Targets.AnalyzerReference.csproj", "{1CD29A62-EC28-4070-8F46-BF5073D6EB83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cranks.Targets.AnalyzerPackage", "Cranks.Targets.AnalyzerPackage\Cranks.Targets.AnalyzerPackage.csproj", "{497E63E9-CA32-4D91-A646-754F3C19B163}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,10 +28,6 @@ Global
 		{1CD29A62-EC28-4070-8F46-BF5073D6EB83}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CD29A62-EC28-4070-8F46-BF5073D6EB83}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1CD29A62-EC28-4070-8F46-BF5073D6EB83}.Release|Any CPU.Build.0 = Release|Any CPU
-		{497E63E9-CA32-4D91-A646-754F3C19B163}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{497E63E9-CA32-4D91-A646-754F3C19B163}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{497E63E9-CA32-4D91-A646-754F3C19B163}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{497E63E9-CA32-4D91-A646-754F3C19B163}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

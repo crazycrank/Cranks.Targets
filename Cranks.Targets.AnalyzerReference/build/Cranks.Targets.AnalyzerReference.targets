@@ -11,16 +11,16 @@
                       OutputItemType="" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <BeforePack>$(BeforePack);IncludeReferencedAnalyzersInPackage</BeforePack>
+  </PropertyGroup>
+
   <!-- NOTE: From https://github.com/dotnet/runtime/blob/main/eng/packaging.targets -->
   <!-- NOTE: This target executes the GetAnalyzerPackFiles step of all ProjectReferences referenced with AnalyzerReference,
              and packs them, as well as the corresponding symbol files to the appropriate folder -->
   <!-- Call a target in the analyzer project to get all the files it would normally place in a package.
        These will be returned as items with identity pointing to the built file, and PackagePath metadata
        set to their location in the package. IsSymbol metadata will be set to distinguish symbols. -->
-  <PropertyGroup>
-    <BeforePack>$(BeforePack);IncludeReferencedAnalyzersInPackage</BeforePack>
-  </PropertyGroup>
-
   <Target Name="IncludeReferencedAnalyzersInPackage"
           Condition="'@(AnalyzerReference)' != '' and @(AnalyzerReference->AnyHaveMetadataValue('Pack', 'true'))">
 
@@ -33,6 +33,7 @@
     <ItemGroup>
       <Content Include="@(_AnalyzerFile)"
                Pack="True"
+               PackagePath="%(_AnalyzerFile.PackagePath)"
                Condition="!%(_AnalyzerFile.IsSymbol)" />
       <!-- Symbols don't honor PackagePath.  By default they are placed in lib/%(TargetFramework).
            Pack does honor TargetPath and does Path.Combine("lib/%(TargetFramework)", "%(TargetPath)"),

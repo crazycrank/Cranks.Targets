@@ -1,20 +1,31 @@
 ﻿<Project>
 
-  <!-- if the property RoslynApiVersion is set, this target validates if the version matches the reference workspace project -->
+  <PropertyGroup>
+    <BeforePack>$(BeforePack);IncludeAnalyzersInPackage</BeforePack>
+    <IsPackable Condition="'$(IsPackableAnalyzer)' == 'true'">true</IsPackable>
+  </PropertyGroup>
+
+  <!-- WIP: This target should validate the Workspace version against the RoslynApiVersion
+       if the property RoslynApiVersion is set, this target validates if the version matches the reference workspace project -->
+  <!--
   <Target Name="ValidateNugetReferenceToRoslynWorkspace"
           BeforeTargets="BeforeBuild"
+          DependsOnTargets="RunResolvePackageDependencies"
           Condition="$(RoslynApiVersion) != '' and @(PackageReference) != ''">
-    <_csWorkspaceVersion Condition="@(PackageReference->AnyHasMetadataValue('Include', 'Microsoft.CodeAnalysis.CSharp.Workspaces'))">
-      @(MyItems->WithMetadataValue("Include", "Microsoft.CodeAnalysis.CSharp.Workspaces")).Version
-    </_csWorkspaceVersion>
-    <_vbWorkspaceVersion Condition="@(PackageReference->AnyHasMetadataValue('Include', 'Microsoft.CodeAnalysis.VisualBasic.Workspaces'))">
-      @(MyItems->WithMetadataValue("Include", "Microsoft.CodeAnalysis.VisualBasic.Workspaces")).Version
-    </_vbWorkspaceVersion>
+    <PropertyGroup>
+      <_csWorkspaceVersion Condition="@(PackageDefinitions->'%Name') == 'Microsoft.CodeAnalysis.CSharp.Workspaces'">
+        @(PackageDefinitions->'%Version')
+      </_csWorkspaceVersion>
+      <_vbWorkspaceVersion Condition="@(PackageDefinitions->'%Name') == 'Microsoft.CodeAnalysis.VisualBasic.Workspaces'">
+        @(PackageDefinitions->'%Version')
+      </_vbWorkspaceVersion>
+    </PropertyGroup>
     <Warning Condition="$(_csWorkspaceVersion) != '' and $(RoslynApiVersion) != $(_csWorkspaceVersion)"
              Text="RoslynApiVersion is set to $(RoslynApiVersion), but the referenced Microsoft.CodeAnalysis.CSharp.Workspaces package has version $(_csWorkspaceVersion). These versions should match." />
     <Warning Condition="$(_vbWorkspaceVersion) != '' and $(RoslynApiVersion) != $(_vbWorkspaceVersion)"
              Text="RoslynApiVersion is set to $(RoslynApiVersion), but the referenced Microsoft.CodeAnalysis.VisualBasic.Workspaces package has version $(_vbWorkspaceVersion). These versions should match." />
   </Target>
+  -->
 
   <!-- NOTE: From https://github.com/dotnet/runtime/blob/main/src/libraries/Directory.Build.props -->
   <!-- NOTE: This target analyses the build output and returns all files that are necessary to be packed into the
@@ -38,6 +49,36 @@
 
     <Error Condition="'%(_AnalyzerPackFile.TargetFramework)' != 'netstandard2.0'"
            Text="Analyzers must only target netstandard2.0 since they run in the compiler which targets netstandard2.0. The following files were found to target '%(_AnalyzerPackFile.TargetFramework)': @(_AnalyzerPackFile)" />
+  </Target>
+
+  <!-- NOTE: From https://github.com/dotnet/runtime/blob/main/eng/packaging.targets -->
+  <!-- NOTE: This target executes the GetAnalyzerPackFiles step of this project to get all analyzer files
+             and packs them, as well as the corresponding symbol files to the analyzer folder -->
+  <Target Name="IncludeAnalyzersInPackage"
+          Condition="'$(IsPackableAnalyzer)' == 'true'">
+
+    <CallTarget Targets="GetAnalyzerPackFiles">
+      <Output TaskParameter="TargetOutputs"
+              ItemName="_AnalyzerFile" />
+    </CallTarget>
+
+    <ItemGroup>
+      <Content Include="@(_AnalyzerFile)"
+               Pack="True"
+               Condition="!%(_AnalyzerFile.IsSymbol)" />
+      <!-- Symbols don't honor PackagePath.  By default they are placed in lib/%(TargetFramework).
+           Pack does honor TargetPath and does Path.Combine("lib/%(TargetFramework)", "%(TargetPath)"),
+           so a rooted path value for TargetPath will override lib.
+           https://github.com/NuGet/Home/issues/10860 -->
+      <_TargetPathsToSymbols Include="@(_AnalyzerFile)"
+                             TargetPath="/%(_AnalyzerFile.PackagePath)"
+                             Condition="%(_AnalyzerFile.IsSymbol)" />
+    </ItemGroup>
+
+    <PropertyGroup>
+      <IncludeBuildOutput>false</IncludeBuildOutput>
+      <NoPackageAnalysis>true</NoPackageAnalysis>
+    </PropertyGroup>
   </Target>
 
 </Project>
