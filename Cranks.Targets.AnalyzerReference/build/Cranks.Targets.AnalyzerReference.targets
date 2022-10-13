@@ -33,7 +33,6 @@
     <ItemGroup>
       <Content Include="@(_AnalyzerFile)"
                Pack="True"
-               PackagePath="%(_AnalyzerFile.PackagePath)"
                Condition="!%(_AnalyzerFile.IsSymbol)" />
       <!-- Symbols don't honor PackagePath.  By default they are placed in lib/%(TargetFramework).
            Pack does honor TargetPath and does Path.Combine("lib/%(TargetFramework)", "%(TargetPath)"),

@@ -11,9 +11,7 @@ Creating a good analyzer is hard enough. Delivering it to your end users is seem
 ### [Cranks.Targets.Analyzer](https://www.nuget.org/packages/Cranks.Targets.PackableAnalyzer)
 Add this package to your analyzer projects.
 The package adds a new MS Build target to your project called `GetAnalyzerPackFiles`. When this target is called it returns a list of all the files which have to be packed into the analyzer folder of your libraries nuget package.
-### [Cranks.Targets.AnalyzerPackage](https://www.nuget.org/packages/Cranks.Targets.PackAsAnalyzer)
-If you want to ship your analyzer project as a dedicated analyzer package, add this package to your analyzer project.
-Adding this package ensures that all the analyzer files get copied directly into the analyzer directory of the created nuget package.
+
 ### [Cranks.Targets.AnalyzerReference](https://www.nuget.org/packages/Cranks.Targets.PackWithReferencedAnalyzer)
 This package server to purposes:
 * You want to ship a library directly with some analyzers

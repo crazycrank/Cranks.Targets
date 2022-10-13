@@ -15,7 +15,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="build\**" Pack="True" PackagePath="build" />
+    <None Include="build\Cranks.Targets.Analyzer.*" Pack="True" PackagePath="build" />
     <None Include="..\README.md" Pack="True" Link="README.md" PackagePath="" />
     <None Include="_._" Pack="True" PackagePath="lib\netstandard2.0" />
   </ItemGroup>
